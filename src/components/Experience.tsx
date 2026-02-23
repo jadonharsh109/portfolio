@@ -7,12 +7,12 @@ import { FiAward, FiStar } from "react-icons/fi";
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-32 overflow-hidden">
+    <section id="experience" className="relative py-16 md:py-32 overflow-hidden">
       <div className="gradient-orb w-[500px] h-[500px] bg-accent/50 top-1/2 -right-60" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <RevealOnScroll>
             <span className="text-accent font-mono text-sm tracking-widest uppercase">
               03 — Experience
@@ -20,12 +20,12 @@ export default function Experience() {
           </RevealOnScroll>
           <AnimatedHeading
             text="Where I've"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
             delay={0.1}
           />
           <AnimatedHeading
             text="Made Impact"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
             delay={0.2}
           />
         </div>
@@ -36,7 +36,7 @@ export default function Experience() {
           {/* Vertical line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/30 to-transparent md:-translate-x-px" />
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {experiences.map((exp, index) => (
               <RevealOnScroll
                 key={index}
@@ -49,8 +49,8 @@ export default function Experience() {
                   }`}
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-0 md:left-1/2 w-4 h-4 -translate-x-[7px] md:-translate-x-1/2 top-2">
-                    <div className="w-4 h-4 rounded-full bg-accent border-4 border-[#050505]" />
+                  <div className="absolute left-0 md:left-1/2 w-3 h-3 sm:w-4 sm:h-4 -translate-x-[5px] sm:-translate-x-[7px] md:-translate-x-1/2 top-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-accent border-4 border-[#050505]" />
                     <motion.div
                       className="absolute inset-0 rounded-full bg-accent"
                       animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
@@ -64,13 +64,13 @@ export default function Experience() {
 
                   {/* Content */}
                   <div
-                    className={`w-full md:w-1/2 pl-8 md:pl-0 ${
+                    className={`w-full md:w-1/2 pl-6 sm:pl-8 md:pl-0 ${
                       index % 2 === 0 ? "md:pr-8" : "md:pl-8"
                     }`}
                   >
                     <motion.div
                       whileHover={{ y: -5 }}
-                      className="p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group"
+                      className="p-5 sm:p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group"
                     >
                       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
                         <div>

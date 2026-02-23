@@ -7,12 +7,12 @@ import { FiGithub, FiExternalLink, FiLayers } from "react-icons/fi";
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-32 overflow-hidden">
+    <section id="projects" className="relative py-16 md:py-32 overflow-hidden">
       <div className="gradient-orb w-[600px] h-[600px] bg-violet-600/50 -bottom-40 -left-60" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <RevealOnScroll>
             <span className="text-accent font-mono text-sm tracking-widest uppercase">
               04 — Projects
@@ -20,12 +20,12 @@ export default function Projects() {
           </RevealOnScroll>
           <AnimatedHeading
             text="Featured"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
             delay={0.1}
           />
           <AnimatedHeading
             text="Projects"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
             delay={0.2}
           />
           <RevealOnScroll delay={0.3}>

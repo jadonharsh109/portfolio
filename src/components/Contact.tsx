@@ -14,12 +14,12 @@ import { SiUpwork, SiDiscord, SiInstagram } from "react-icons/si";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="contact" className="relative py-16 md:py-32 overflow-hidden">
       <div className="gradient-orb w-[600px] h-[600px] bg-accent/40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 md:mb-20">
           <RevealOnScroll>
             <span className="text-accent font-mono text-sm tracking-widest uppercase">
               06 — Contact
@@ -27,12 +27,12 @@ export default function Contact() {
           </RevealOnScroll>
           <AnimatedHeading
             text="Let's Build Something"
-            className="text-4xl md:text-5xl lg:text-7xl font-bold mt-4 text-white justify-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mt-4 text-white justify-center"
             delay={0.1}
           />
           <AnimatedHeading
             text="Amazing Together"
-            className="text-4xl md:text-5xl lg:text-7xl font-bold text-gradient justify-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gradient justify-center"
             delay={0.2}
           />
           <RevealOnScroll delay={0.3}>
@@ -50,21 +50,21 @@ export default function Contact() {
             <MagneticButton strength={0.15}>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="group inline-flex items-center gap-4 px-10 py-6 rounded-2xl border border-accent/30 bg-accent/5 hover:bg-accent/10 hover:border-accent/50 transition-all duration-500 hover-target"
+                className="group inline-flex items-center gap-3 sm:gap-4 px-5 sm:px-10 py-4 sm:py-6 rounded-2xl border border-accent/30 bg-accent/5 hover:bg-accent/10 hover:border-accent/50 transition-all duration-500 hover-target w-full sm:w-auto justify-center sm:justify-start"
               >
-                <div className="w-14 h-14 rounded-xl bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
-                  <FiMail className="text-accent" size={24} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors shrink-0">
+                  <FiMail className="text-accent" size={22} />
                 </div>
-                <div className="text-left">
+                <div className="text-left min-w-0">
                   <div className="text-xs text-muted uppercase tracking-wider font-mono mb-1">
                     Drop me a line
                   </div>
-                  <div className="text-xl md:text-2xl font-bold text-white group-hover:text-accent transition-colors">
+                  <div className="text-base sm:text-xl md:text-2xl font-bold text-white group-hover:text-accent transition-colors truncate">
                     {siteConfig.email}
                   </div>
                 </div>
                 <FiArrowUpRight
-                  className="text-muted group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all ml-4"
+                  className="text-muted group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all ml-2 sm:ml-4 shrink-0 hidden sm:block"
                   size={24}
                 />
               </a>
@@ -74,7 +74,7 @@ export default function Contact() {
 
         {/* Social Grid */}
         <RevealOnScroll delay={0.4}>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-3xl mx-auto">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4 max-w-3xl mx-auto">
             {[
               {
                 icon: <FiGithub size={22} />,
@@ -113,7 +113,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -5 }}
-                  className={`group flex flex-col items-center gap-3 p-6 rounded-2xl border border-border bg-card hover:bg-card-hover transition-all duration-300 hover-target ${social.color}`}
+                  className={`group flex flex-col items-center gap-2 sm:gap-3 p-4 sm:p-6 rounded-2xl border border-border bg-card hover:bg-card-hover transition-all duration-300 hover-target ${social.color}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -141,16 +141,16 @@ export default function Contact() {
               whileHover={{ scale: 1.02 }}
               className="inline-flex items-center gap-4 p-6 rounded-2xl border border-green-500/20 bg-green-500/5 hover:bg-green-500/10 hover:border-green-500/30 transition-all duration-300 hover-target"
             >
-              <SiUpwork className="text-green-400" size={28} />
-              <div className="text-left">
-                <div className="text-white font-semibold">
+              <SiUpwork className="text-green-400 shrink-0" size={24} />
+              <div className="text-left min-w-0">
+                <div className="text-white font-semibold text-sm sm:text-base">
                   Hire me on Upwork
                 </div>
-                <div className="text-muted text-sm">
+                <div className="text-muted text-xs sm:text-sm">
                   Top-rated freelancer for DevOps, AWS & Cloud projects
                 </div>
               </div>
-              <FiArrowUpRight className="text-green-400" size={20} />
+              <FiArrowUpRight className="text-green-400 shrink-0 hidden sm:block" size={20} />
             </motion.a>
           </div>
         </RevealOnScroll>

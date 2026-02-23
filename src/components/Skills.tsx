@@ -45,13 +45,13 @@ const iconMap: Record<string, string> = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-32 overflow-hidden">
+    <section id="skills" className="relative py-16 md:py-32 overflow-hidden">
       {/* Background */}
       <div className="gradient-orb w-[500px] h-[500px] bg-purple-600/50 bottom-0 left-1/4" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <RevealOnScroll>
             <span className="text-accent font-mono text-sm tracking-widest uppercase">
               02 — Skills
@@ -59,12 +59,12 @@ export default function Skills() {
           </RevealOnScroll>
           <AnimatedHeading
             text="Technologies & Tools"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
             delay={0.1}
           />
           <AnimatedHeading
             text="I Work With"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
             delay={0.2}
           />
         </div>

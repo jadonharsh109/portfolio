@@ -22,24 +22,24 @@ export default function Hero() {
       <div className="gradient-orb pulse-glow w-[400px] h-[400px] bg-purple-600 bottom-1/4 -right-32" />
       <div className="gradient-orb w-[300px] h-[300px] bg-violet-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
-      {/* Floating geometric shapes */}
+      {/* Floating geometric shapes — hidden on mobile to reduce clutter */}
       <motion.div
-        className="absolute top-32 right-20 w-20 h-20 border border-accent/20 rounded-lg"
+        className="absolute top-32 right-20 w-20 h-20 border border-accent/20 rounded-lg hidden md:block"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-40 left-20 w-16 h-16 border border-accent/10 rounded-full"
+        className="absolute bottom-40 left-20 w-16 h-16 border border-accent/10 rounded-full hidden md:block"
         animate={{ y: [-20, 20, -20] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-1/3 right-1/4 w-3 h-3 bg-accent/30 rounded-full"
+        className="absolute top-1/3 right-1/4 w-3 h-3 bg-accent/30 rounded-full hidden sm:block"
         animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.7, 0.3] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-1/3 left-1/4 w-2 h-2 bg-accent-light/40 rounded-full"
+        className="absolute bottom-1/3 left-1/4 w-2 h-2 bg-accent-light/40 rounded-full hidden sm:block"
         animate={{ scale: [1, 2, 1], opacity: [0.2, 0.5, 0.2] }}
         transition={{
           duration: 5,
@@ -72,7 +72,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-4"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.9]">
               <span className="block text-white">Hi, I&apos;m</span>
               <span className="block text-gradient mt-2">
                 {siteConfig.shortName}
@@ -188,7 +188,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 md:gap-12"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -198,7 +198,7 @@ export default function Hero() {
                 transition={{ delay: 1.3 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-gradient">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">
                   {stat.value}
                 </div>
                 <div className="text-sm text-muted mt-1">{stat.label}</div>

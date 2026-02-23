@@ -318,3 +318,28 @@
     display: none !important;
   }
 }
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Smoother scrolling on iOS */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent text size adjust on orientation change */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Reduce gradient orb sizes on mobile */
+  .gradient-orb {
+    filter: blur(60px);
+    opacity: 0.1;
+  }
+
+  /* Thinner scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+}

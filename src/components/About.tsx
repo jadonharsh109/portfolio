@@ -28,13 +28,13 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative py-32 overflow-hidden">
+    <section id="about" className="relative py-16 md:py-32 overflow-hidden">
       {/* Background accent */}
       <div className="gradient-orb w-[600px] h-[600px] bg-accent/50 -top-40 -right-80" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <RevealOnScroll>
             <span className="text-accent font-mono text-sm tracking-widest uppercase">
               01 — About
@@ -42,17 +42,17 @@ export default function About() {
           </RevealOnScroll>
           <AnimatedHeading
             text="Crafting Cloud Infrastructure"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-white"
             delay={0.1}
           />
           <AnimatedHeading
             text="That Scales"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient"
             delay={0.2}
           />
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-16">
+        <div className="grid lg:grid-cols-5 gap-8 md:gap-16">
           {/* Left column: text */}
           <div className="lg:col-span-3 space-y-6">
             {aboutParagraphs.map((paragraph, index) => (
@@ -143,7 +143,7 @@ export default function About() {
                     <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-accent via-purple-500 to-violet-400 opacity-30 blur-lg group-hover/photo:opacity-60 transition-opacity duration-500" />
 
                     {/* Outer gradient ring */}
-                    <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full p-[3px] bg-gradient-to-br from-accent via-purple-500 to-violet-400">
+                    <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full p-[3px] bg-gradient-to-br from-accent via-purple-500 to-violet-400">
                       {/* Inner container */}
                       <div className="w-full h-full rounded-full bg-[#0a0a0a] p-1.5 overflow-hidden">
                         <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -197,14 +197,13 @@ export default function About() {
                 href: siteConfig.social.upwork,
               },
             ].map((item, index) => (
-              <RevealOnScroll
-                key={item.label}
+              <RevealOnScroll key={item.label}
                 delay={index * 0.1}
                 direction="right"
               >
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="group p-5 rounded-xl border border-border bg-card hover:bg-card-hover hover:border-accent/20 transition-all duration-300 card-shine"
+                  className="group p-4 sm:p-5 rounded-xl border border-border bg-card hover:bg-card-hover hover:border-accent/20 transition-all duration-300 card-shine"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">

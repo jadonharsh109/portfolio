@@ -67,16 +67,16 @@ const langColors: Record<string, string> = {
 
 export default function GitHub() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 md:py-24 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6 mb-10 md:mb-14">
             <div>
               <span className="text-accent font-mono text-sm tracking-widest uppercase block mb-4">
                 Open Source
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 GitHub Activity
               </h2>
               <p className="text-muted mt-3 max-w-lg">
@@ -116,36 +116,38 @@ export default function GitHub() {
 
         {/* Contribution Graph */}
         <RevealOnScroll delay={0.15}>
-          <div className="p-6 rounded-2xl border border-border bg-card mb-12">
+          <div className="p-4 sm:p-6 rounded-2xl border border-border bg-card mb-12">
             <div className="text-xs text-muted uppercase tracking-wider font-mono mb-4">
               Contribution Graph
             </div>
-            <div className="flex gap-[3px] flex-wrap justify-center">
-              {Array.from({ length: 52 }).map((_, weekIdx) => (
-                <div key={weekIdx} className="flex flex-col gap-[3px]">
-                  {Array.from({ length: 7 }).map((_, dayIdx) => {
-                    // Deterministic pseudo-random based on position
-                    const seed = (weekIdx * 7 + dayIdx + 42) * 2654435761;
-                    const intensity = ((seed >>> 0) % 100) / 100;
-                    return (
-                      <div
-                        key={dayIdx}
-                        className="w-[11px] h-[11px] rounded-[2px]"
-                        style={{
-                          backgroundColor:
-                            intensity > 0.75
-                              ? "#7c3aed"
-                              : intensity > 0.5
-                                ? "rgba(124,58,237,0.55)"
-                                : intensity > 0.3
-                                  ? "rgba(124,58,237,0.25)"
-                                  : "rgba(124,58,237,0.06)",
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-              ))}
+            <div className="overflow-x-auto -mx-2 px-2 pb-2">
+              <div className="flex gap-[3px] w-max sm:w-auto sm:flex-wrap sm:justify-center">
+                {Array.from({ length: 52 }).map((_, weekIdx) => (
+                  <div key={weekIdx} className="flex flex-col gap-[3px]">
+                    {Array.from({ length: 7 }).map((_, dayIdx) => {
+                      // Deterministic pseudo-random based on position
+                      const seed = (weekIdx * 7 + dayIdx + 42) * 2654435761;
+                      const intensity = ((seed >>> 0) % 100) / 100;
+                      return (
+                        <div
+                          key={dayIdx}
+                          className="w-[9px] h-[9px] sm:w-[11px] sm:h-[11px] rounded-[2px]"
+                          style={{
+                            backgroundColor:
+                              intensity > 0.75
+                                ? "#7c3aed"
+                                : intensity > 0.5
+                                  ? "rgba(124,58,237,0.55)"
+                                  : intensity > 0.3
+                                    ? "rgba(124,58,237,0.25)"
+                                    : "rgba(124,58,237,0.06)",
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </RevealOnScroll>
