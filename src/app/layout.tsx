@@ -52,6 +52,20 @@ export const metadata: Metadata = {
       "DevOps & Platform Engineer with 4+ years of experience building cloud-native platforms across AWS and Azure.",
   },
   metadataBase: new URL("https://jadonharsh.in"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -61,6 +75,47 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Harshvardhan Singh Jadon",
+              url: "https://jadonharsh.in",
+              jobTitle: "DevOps & Platform Engineer",
+              worksFor: {
+                "@type": "Organization",
+                name: "howie.systems",
+              },
+              sameAs: [
+                "https://github.com/jadonharsh109",
+                "https://www.linkedin.com/in/jadonharsh/",
+                "https://www.upwork.com/freelancers/jadonharsh",
+              ],
+              knowsAbout: [
+                "DevOps",
+                "AWS",
+                "Azure",
+                "Kubernetes",
+                "Terraform",
+                "CI/CD",
+                "Docker",
+                "Platform Engineering",
+                "Infrastructure as Code",
+                "Cloud Architecture",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Indore",
+                addressRegion: "Madhya Pradesh",
+                addressCountry: "IN",
+              },
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased bg-[#050505] text-[#ededed]`}
       >
