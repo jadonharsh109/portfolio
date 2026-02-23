@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -44,16 +45,24 @@ export const metadata: Metadata = {
     description:
       "DevOps & Platform Engineer with 4+ years of experience building cloud-native platforms across AWS and Azure.",
     siteName: "jadonharsh.in",
+    images: [
+      {
+        url: "/profile.png",
+        width: 1200,
+        height: 630,
+        alt: "Harshvardhan Singh Jadon - DevOps & Platform Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Harshvardhan Singh Jadon | DevOps & Platform Engineer",
     description:
       "DevOps & Platform Engineer with 4+ years of experience building cloud-native platforms across AWS and Azure.",
+    images: ["/profile.png"],
   },
-  metadataBase: new URL("https://jadonharsh.in"),
   alternates: {
-    canonical: "/",
+    canonical: "https://jadonharsh.in",
   },
   robots: {
     index: true,
@@ -66,6 +75,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  metadataBase: new URL("https://jadonharsh.in"),
 };
 
 export default function RootLayout({
@@ -75,8 +85,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <script
+      <body
+        className={`${inter.variable} ${jetbrains.variable} antialiased bg-[#050505] text-[#ededed]`}
+      >
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -84,6 +97,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Harshvardhan Singh Jadon",
               url: "https://jadonharsh.in",
+              image: "https://jadonharsh.in/profile.png",
               jobTitle: "DevOps & Platform Engineer",
               worksFor: {
                 "@type": "Organization",
@@ -103,9 +117,8 @@ export default function RootLayout({
                 "CI/CD",
                 "Docker",
                 "Platform Engineering",
-                "Infrastructure as Code",
-                "Cloud Architecture",
               ],
+              alumniOf: "HCLTech",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Indore",
@@ -115,10 +128,6 @@ export default function RootLayout({
             }),
           }}
         />
-      </head>
-      <body
-        className={`${inter.variable} ${jetbrains.variable} antialiased bg-[#050505] text-[#ededed]`}
-      >
         {children}
       </body>
     </html>
