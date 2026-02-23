@@ -1,11 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { aboutParagraphs, siteConfig } from "@/lib/data";
 import { AnimatedHeading, RevealOnScroll } from "./AnimatedText";
 import { FiMapPin, FiBriefcase, FiMail, FiExternalLink } from "react-icons/fi";
+import Image from "next/image";
 
 export default function About() {
+  const [clicked, setClicked] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+
+  const messages = [
+    "Hey there! 👋",
+    "Yes, that's me! 😄",
+    "Stop poking me! 😂",
+    "Okay fine, hire me? 🚀",
+    "I do Terraform btw 🏗️",
+    "kubectl get pods 🤓",
+    "Still here? Let's connect! 💬",
+  ];
+
+  const handlePhotoClick = () => {
+    setClicked(true);
+    setClickCount((prev) => prev + 1);
+    setTimeout(() => setClicked(false), 4000);
+  };
+
   return (
     <section id="about" className="relative py-32 overflow-hidden">
       {/* Background accent */}
@@ -63,8 +84,95 @@ export default function About() {
             </RevealOnScroll>
           </div>
 
-          {/* Right column: info cards */}
+          {/* Right column: photo + info cards */}
           <div className="lg:col-span-2 space-y-4">
+            {/* Profile Photo */}
+            <RevealOnScroll direction="right">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  {/* Speech bubble popup */}
+                  <AnimatePresence>
+                    {clicked && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                        animate={{ opacity: 1, y: -20, scale: 1 }}
+                        exit={{ opacity: 0, y: -40, scale: 0.5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                        className="absolute -top-16 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap"
+                      >
+                        <div className="px-4 py-2 rounded-xl bg-accent text-white text-sm font-medium shadow-lg shadow-accent/30">
+                          {messages[(clickCount - 1) % messages.length]}
+                          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-accent rotate-45" />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Emoji burst on click */}
+                  <AnimatePresence>
+                    {clicked && (
+                      <>
+                        {["✨", "🚀", "⚡", "💜"].map((emoji, i) => (
+                          <motion.span
+                            key={`${clickCount}-${i}`}
+                            initial={{ opacity: 1, scale: 0 }}
+                            animate={{
+                              opacity: [1, 0],
+                              scale: [0.5, 1.2],
+                              x: [0, (i % 2 === 0 ? 1 : -1) * (40 + i * 15)],
+                              y: [0, -(50 + i * 20)],
+                            }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="absolute top-1/2 left-1/2 text-xl z-10 pointer-events-none"
+                          >
+                            {emoji}
+                          </motion.span>
+                        ))}
+                      </>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.div
+                    onClick={handlePhotoClick}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97, rotate: -3 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="relative cursor-pointer group/photo"
+                  >
+                    {/* Subtle glow — static, no spinning */}
+                    <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-accent via-purple-500 to-violet-400 opacity-30 blur-lg group-hover/photo:opacity-60 transition-opacity duration-500" />
+
+                    {/* Outer gradient ring */}
+                    <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full p-[3px] bg-gradient-to-br from-accent via-purple-500 to-violet-400">
+                      {/* Inner container */}
+                      <div className="w-full h-full rounded-full bg-[#0a0a0a] p-1.5 overflow-hidden">
+                        <div className="relative w-full h-full rounded-full overflow-hidden">
+                          <Image
+                            src="/profile.png"
+                            alt="Harshvardhan Singh Jadon"
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
+                            priority
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* "Click me" hint */}
+                    {clickCount === 0 && (
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted/50 font-mono whitespace-nowrap"
+                      >
+                        click me :)
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
+              </div>
+            </RevealOnScroll>
+
             {[
               {
                 icon: <FiBriefcase className="text-accent" size={20} />,
