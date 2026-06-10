@@ -148,7 +148,7 @@ export default function About() {
                       <div className="w-full h-full rounded-full bg-[#0a0a0a] p-1.5 overflow-hidden">
                         <div className="relative w-full h-full rounded-full overflow-hidden">
                           <Image
-                            src="/profile.png"
+                            src="/profile.jpg"
                             alt="Harshvardhan Singh Jadon"
                             fill
                             className="object-cover transition-transform duration-500 group-hover/photo:scale-105"

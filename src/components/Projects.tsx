@@ -3,20 +3,33 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/data";
 import { AnimatedHeading, RevealOnScroll } from "./AnimatedText";
+import ScrambleText from "./ScrambleText";
+import TiltCard from "./TiltCard";
+import { useParallax } from "@/lib/useParallax";
 import { FiGithub, FiExternalLink, FiLayers } from "react-icons/fi";
 
 export default function Projects() {
+  const { ref, y } = useParallax<HTMLElement>(70);
+
   return (
-    <section id="projects" className="relative py-16 md:py-32 overflow-hidden">
-      <div className="gradient-orb w-[600px] h-[600px] bg-violet-600/50 -bottom-40 -left-60" />
+    <section
+      ref={ref}
+      id="projects"
+      className="relative py-16 md:py-32 overflow-hidden"
+    >
+      <motion.div
+        style={{ y }}
+        className="gradient-orb w-[600px] h-[600px] bg-violet-600/50 -bottom-40 -left-60"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 md:mb-20">
           <RevealOnScroll>
-            <span className="text-accent font-mono text-sm tracking-widest uppercase">
-              04 — Projects
-            </span>
+            <ScrambleText
+              text="04 — Projects"
+              className="text-accent font-mono text-sm tracking-widest uppercase"
+            />
           </RevealOnScroll>
           <AnimatedHeading
             text="Featured"
@@ -54,10 +67,8 @@ export default function Projects() {
                 }}
                 className="h-full"
               >
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  className="group h-full p-6 rounded-2xl border border-border bg-card hover:border-accent/30 hover:bg-card-hover transition-all duration-500 card-shine hover-target flex flex-col"
-                >
+                <TiltCard className="h-full">
+                  <div className="group h-full p-6 rounded-2xl border border-border bg-card hover:border-accent/30 hover:bg-card-hover transition-all duration-500 card-shine hover-target flex flex-col">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
@@ -71,6 +82,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        data-cursor-label="Source"
                         className="flex items-center gap-1.5 text-muted hover:text-accent transition-colors"
                       >
                         <FiGithub size={16} />
@@ -115,7 +127,8 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </AnimatePresence>

@@ -194,10 +194,10 @@ export const experiences: Experience[] = [
     ],
   },
   {
-    role: "Analyst (Full Time) — Serving Notice",
+    role: "Analyst (Full Time)",
     company: "HCLTech",
     location: "Lucknow (Onsite)",
-    period: "Dec 2022 – Present",
+    period: "Dec 2022 – Mar 2026",
     description:
       "Administered enterprise Active Directory infrastructure supporting 1M+ users in healthcare.",
     highlights: [

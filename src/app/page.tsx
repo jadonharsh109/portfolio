@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
+import Preloader from "@/components/Preloader";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -22,6 +24,8 @@ const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"), {
 export default function Home() {
   return (
     <SmoothScroll>
+      <Preloader />
+      <ScrollProgress />
       <CustomCursor />
       <div className="noise-bg">
         <Navbar />

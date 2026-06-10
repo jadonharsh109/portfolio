@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { skillCategories } from "@/lib/data";
 import { AnimatedHeading, RevealOnScroll } from "./AnimatedText";
+import ScrambleText from "./ScrambleText";
+import VelocityMarquee from "./VelocityMarquee";
+import { useParallax } from "@/lib/useParallax";
 
 const iconMap: Record<string, string> = {
   AWS: "☁️",
@@ -44,18 +47,28 @@ const iconMap: Record<string, string> = {
 };
 
 export default function Skills() {
+  const { ref, y } = useParallax<HTMLElement>(60);
+
   return (
-    <section id="skills" className="relative py-16 md:py-32 overflow-hidden">
+    <section
+      ref={ref}
+      id="skills"
+      className="relative py-16 md:py-32 overflow-hidden"
+    >
       {/* Background */}
-      <div className="gradient-orb w-[500px] h-[500px] bg-purple-600/50 bottom-0 left-1/4" />
+      <motion.div
+        style={{ y }}
+        className="gradient-orb w-[500px] h-[500px] bg-purple-600/50 bottom-0 left-1/4"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 md:mb-20">
           <RevealOnScroll>
-            <span className="text-accent font-mono text-sm tracking-widest uppercase">
-              02 — Skills
-            </span>
+            <ScrambleText
+              text="02 — Skills"
+              className="text-accent font-mono text-sm tracking-widest uppercase"
+            />
           </RevealOnScroll>
           <AnimatedHeading
             text="Technologies & Tools"
@@ -135,17 +148,18 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Marquee strip */}
+        {/* Scroll-velocity marquee strip */}
         <RevealOnScroll delay={0.5}>
           <div className="mt-20 relative">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#050505] to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#050505] to-transparent z-10" />
-            <div className="marquee py-4 border-y border-border/30">
-              <div className="marquee-content">
-                {[
-                  ...skillCategories.flatMap((c) => c.skills),
-                  ...skillCategories.flatMap((c) => c.skills),
-                ].map((skill, i) => (
+            <VelocityMarquee
+              baseVelocity={-4}
+              className="py-4 border-y border-border/30"
+            >
+              {skillCategories
+                .flatMap((c) => c.skills)
+                .map((skill, i) => (
                   <span
                     key={i}
                     className="mx-6 text-lg font-light text-muted/30 whitespace-nowrap"
@@ -153,8 +167,7 @@ export default function Skills() {
                     {skill}
                   </span>
                 ))}
-              </div>
-            </div>
+            </VelocityMarquee>
           </div>
         </RevealOnScroll>
       </div>

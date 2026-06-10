@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { upworkReviews, siteConfig } from "@/lib/data";
 import { AnimatedHeading, RevealOnScroll } from "./AnimatedText";
+import ScrambleText from "./ScrambleText";
+import TiltCard from "./TiltCard";
+import { useParallax } from "@/lib/useParallax";
 import { SiUpwork } from "react-icons/si";
 import { FiArrowUpRight, FiStar } from "react-icons/fi";
 
@@ -25,17 +28,27 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Reviews() {
+  const { ref, y } = useParallax<HTMLElement>(60);
+
   return (
-    <section id="reviews" className="relative py-16 md:py-32 overflow-hidden">
-      <div className="gradient-orb w-[500px] h-[500px] bg-green-500/20 -bottom-40 -left-60" />
+    <section
+      ref={ref}
+      id="reviews"
+      className="relative py-16 md:py-32 overflow-hidden"
+    >
+      <motion.div
+        style={{ y }}
+        className="gradient-orb w-[500px] h-[500px] bg-green-500/20 -bottom-40 -left-60"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 md:mb-20">
           <RevealOnScroll>
-            <span className="text-accent font-mono text-sm tracking-widest uppercase">
-              05 — Reviews
-            </span>
+            <ScrambleText
+              text="05 — Reviews"
+              className="text-accent font-mono text-sm tracking-widest uppercase"
+            />
           </RevealOnScroll>
           <AnimatedHeading
             text="What Clients"
@@ -61,10 +74,8 @@ export default function Reviews() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {upworkReviews.map((review, index) => (
             <RevealOnScroll key={index} delay={index * 0.1} className="h-full">
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="group h-full p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-green-500/20 hover:bg-card-hover transition-all duration-500 card-shine flex flex-col"
-              >
+              <TiltCard className="h-full" intensity={6}>
+                <div className="group h-full p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-green-500/20 hover:bg-card-hover transition-all duration-500 card-shine flex flex-col">
                 {/* Header: rating + date */}
                 <div className="flex items-center justify-between mb-4">
                   <StarRating rating={review.rating} />
@@ -96,7 +107,8 @@ export default function Reviews() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+                </div>
+              </TiltCard>
             </RevealOnScroll>
           ))}
         </div>

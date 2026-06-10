@@ -1,12 +1,34 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { siteConfig, stats } from "@/lib/data";
 import MagneticButton from "./MagneticButton";
+import CountUp from "./CountUp";
+import ScrambleText from "./ScrambleText";
+import Hero3D from "./hero/Hero3D";
 import { FiGithub, FiLinkedin, FiArrowDown } from "react-icons/fi";
 import { SiUpwork } from "react-icons/si";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
+
+  // Scroll-linked parallax: content drifts down and fades as the hero leaves.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const yRaw = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const opacityRaw = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const y = prefersReduced ? undefined : yRaw;
+  const opacity = prefersReduced ? undefined : opacityRaw;
+
   const handleScroll = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -14,6 +36,7 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern pt-20 pb-16"
     >
@@ -49,7 +72,13 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+      {/* WebGL centerpiece (desktop, motion-friendly devices only) */}
+      <Hero3D />
+
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full"
+      >
         <div className="flex flex-col items-center text-center">
           {/* Status badge */}
           <motion.div
@@ -59,9 +88,10 @@ export default function Hero() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 mb-8">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm text-muted font-mono">
-                Available for Freelance
-              </span>
+              <ScrambleText
+                text="Available for Freelance"
+                className="text-sm text-muted font-mono"
+              />
             </div>
           </motion.div>
 
@@ -175,6 +205,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
+                  data-cursor-label={social.label}
                   className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 text-muted hover:text-white hover:border-accent/50 hover:bg-accent/10 transition-all duration-300 hover-target"
                 >
                   {social.icon}
@@ -199,7 +230,7 @@ export default function Hero() {
                 className="text-center"
               >
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                 </div>
                 <div className="text-sm text-muted mt-1">{stat.label}</div>
               </motion.div>
@@ -224,7 +255,7 @@ export default function Hero() {
             </motion.button>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

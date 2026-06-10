@@ -3,20 +3,33 @@
 import { motion } from "framer-motion";
 import { experiences, certifications, achievements } from "@/lib/data";
 import { AnimatedHeading, RevealOnScroll } from "./AnimatedText";
+import ScrambleText from "./ScrambleText";
+import TiltCard from "./TiltCard";
+import { useParallax } from "@/lib/useParallax";
 import { FiAward, FiStar } from "react-icons/fi";
 
 export default function Experience() {
+  const { ref, y } = useParallax<HTMLElement>(60);
+
   return (
-    <section id="experience" className="relative py-16 md:py-32 overflow-hidden">
-      <div className="gradient-orb w-[500px] h-[500px] bg-accent/50 top-1/2 -right-60" />
+    <section
+      ref={ref}
+      id="experience"
+      className="relative py-16 md:py-32 overflow-hidden"
+    >
+      <motion.div
+        style={{ y }}
+        className="gradient-orb w-[500px] h-[500px] bg-accent/50 top-1/2 -right-60"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 md:mb-20">
           <RevealOnScroll>
-            <span className="text-accent font-mono text-sm tracking-widest uppercase">
-              03 — Experience
-            </span>
+            <ScrambleText
+              text="03 — Experience"
+              className="text-accent font-mono text-sm tracking-widest uppercase"
+            />
           </RevealOnScroll>
           <AnimatedHeading
             text="Where I've"
@@ -68,10 +81,8 @@ export default function Experience() {
                       index % 2 === 0 ? "md:pr-8" : "md:pl-8"
                     }`}
                   >
-                    <motion.div
-                      whileHover={{ y: -5 }}
-                      className="p-5 sm:p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group"
-                    >
+                    <TiltCard intensity={5}>
+                      <div className="p-5 sm:p-6 md:p-8 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group">
                       <div className="flex items-start justify-between mb-4 flex-wrap gap-2">
                         <div>
                           <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors">
@@ -111,7 +122,8 @@ export default function Experience() {
                           </span>
                         ))}
                       </div>
-                    </motion.div>
+                      </div>
+                    </TiltCard>
                   </div>
 
                   {/* Empty space for the other side */}
@@ -133,10 +145,8 @@ export default function Experience() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
               <RevealOnScroll key={`cert-${index}`} delay={index * 0.1} className="h-full">
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="h-full p-6 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group"
-                >
+                <TiltCard className="h-full" intensity={6}>
+                  <div className="h-full p-6 rounded-2xl border border-border bg-card hover:border-accent/20 transition-all duration-500 card-shine group">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
                       <FiAward className="text-accent text-xl" />
@@ -150,16 +160,15 @@ export default function Experience() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                  </div>
+                </TiltCard>
               </RevealOnScroll>
             ))}
 
             {achievements.map((ach, index) => (
               <RevealOnScroll key={`ach-${index}`} delay={(certifications.length + index) * 0.1} className="h-full">
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="h-full p-6 rounded-2xl border border-border bg-card hover:border-amber-500/20 transition-all duration-500 card-shine group"
-                >
+                <TiltCard className="h-full" intensity={6}>
+                  <div className="h-full p-6 rounded-2xl border border-border bg-card hover:border-amber-500/20 transition-all duration-500 card-shine group">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0">
                       <FiStar className="text-amber-400 text-xl" />
@@ -173,7 +182,8 @@ export default function Experience() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                  </div>
+                </TiltCard>
               </RevealOnScroll>
             ))}
           </div>

@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/data";
 import { RevealOnScroll } from "./AnimatedText";
+import CountUp from "./CountUp";
+import ScrambleText from "./ScrambleText";
+import TiltCard from "./TiltCard";
 import { FiGithub, FiExternalLink, FiStar, FiGitBranch } from "react-icons/fi";
 
 const pinnedRepos = [
@@ -73,9 +75,10 @@ export default function GitHub() {
         <RevealOnScroll>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6 mb-10 md:mb-14">
             <div>
-              <span className="text-accent font-mono text-sm tracking-widest uppercase block mb-4">
-                Open Source
-              </span>
+              <ScrambleText
+                text="Open Source"
+                className="text-accent font-mono text-sm tracking-widest uppercase block mb-4"
+              />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 GitHub Activity
               </h2>
@@ -105,7 +108,9 @@ export default function GitHub() {
                 key={stat.label}
                 className="p-5 rounded-xl border border-border bg-card text-center"
               >
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-2xl font-bold text-white">
+                  <CountUp value={stat.value} />
+                </div>
                 <div className="text-muted text-xs font-mono mt-1 uppercase tracking-wider">
                   {stat.label}
                 </div>
@@ -156,11 +161,12 @@ export default function GitHub() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {pinnedRepos.map((repo, index) => (
             <RevealOnScroll key={repo.name} delay={index * 0.08} className="h-full">
-              <motion.a
+              <TiltCard className="h-full" radiusClass="rounded-xl" intensity={6}>
+              <a
                 href={`${siteConfig.social.github}/${repo.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -5 }}
+                data-cursor-label="Open repo"
                 className="group flex flex-col p-5 rounded-xl border border-border bg-card hover:border-accent/25 transition-all duration-300 card-shine hover-target h-full"
               >
                 <div className="flex items-center gap-2 mb-3">
@@ -188,7 +194,8 @@ export default function GitHub() {
                     <span className="text-xs">{repo.stars}</span>
                   </div>
                 </div>
-              </motion.a>
+              </a>
+              </TiltCard>
             </RevealOnScroll>
           ))}
         </div>

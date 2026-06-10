@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "jadonharsh.in",
     images: [
       {
-        url: "/profile.png",
+        url: "/profile.jpg",
         width: 1200,
         height: 630,
         alt: "Harshvardhan Singh Jadon - DevOps & Platform Engineer",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Harshvardhan Singh Jadon | DevOps & Platform Engineer",
     description:
       "DevOps & Platform Engineer with 4+ years of experience building cloud-native platforms across AWS and Azure.",
-    images: ["/profile.png"],
+    images: ["/profile.jpg"],
   },
   alternates: {
     canonical: "https://jadonharsh.in",
@@ -97,7 +97,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Harshvardhan Singh Jadon",
               url: "https://jadonharsh.in",
-              image: "https://jadonharsh.in/profile.png",
+              image: "https://jadonharsh.in/profile.jpg",
               jobTitle: "DevOps & Platform Engineer",
               worksFor: {
                 "@type": "Organization",
