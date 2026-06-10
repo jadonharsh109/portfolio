@@ -20,31 +20,41 @@ class SilentBoundary extends Component<{ children: ReactNode }, { failed: boolea
 }
 
 /**
- * Renders the WebGL hero centerpiece only on devices that can do it justice:
- * a desktop-class screen with a fine pointer and no reduced-motion preference.
- * Everywhere else it renders nothing and the CSS gradient orbs carry the hero.
+ * Renders the WebGL hero centerpiece on phones and desktops alike (anyone who
+ * hasn't asked for reduced motion). On coarse-pointer / small screens it runs
+ * in a lighter "low power" mode. If WebGL is unavailable the error boundary
+ * renders nothing and the CSS gradient orbs carry the hero.
  */
 export default function Hero3D() {
   const prefersReduced = useReducedMotion();
-  const [enabled, setEnabled] = useState(false);
+  const [config, setConfig] = useState<{ on: boolean; lowPower: boolean }>({
+    on: false,
+    lowPower: false,
+  });
 
   useEffect(() => {
     if (prefersReduced) {
-      setEnabled(false);
+      setConfig({ on: false, lowPower: false });
       return;
     }
-    const mq = window.matchMedia("(min-width: 768px) and (pointer: fine)");
-    const apply = () => setEnabled(mq.matches);
+    const coarse = window.matchMedia("(pointer: coarse)");
+    const small = window.matchMedia("(max-width: 768px)");
+    const apply = () =>
+      setConfig({ on: true, lowPower: coarse.matches || small.matches });
     apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
+    coarse.addEventListener("change", apply);
+    small.addEventListener("change", apply);
+    return () => {
+      coarse.removeEventListener("change", apply);
+      small.removeEventListener("change", apply);
+    };
   }, [prefersReduced]);
 
-  if (!enabled) return null;
+  if (!config.on) return null;
 
   return (
     <SilentBoundary>
-      <HeroScene />
+      <HeroScene lowPower={config.lowPower} />
     </SilentBoundary>
   );
 }

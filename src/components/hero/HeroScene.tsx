@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Icosahedron, MeshDistortMaterial, Points, PointMaterial } from "@react-three/drei";
 import { motion } from "framer-motion";
@@ -8,7 +8,7 @@ import type { Mesh, Points as ThreePoints } from "three";
 
 type PointerRef = React.RefObject<{ x: number; y: number }>;
 
-/** Tracks the normalized pointer position (-1..1) at the window level. */
+/** Tracks the normalized pointer position (-1..1) — also fires for touch drags. */
 function useGlobalPointer(): PointerRef {
   const pointer = useRef({ x: 0, y: 0 });
   useEffect(() => {
@@ -22,8 +22,8 @@ function useGlobalPointer(): PointerRef {
   return pointer;
 }
 
-/** Glowing, distorting wireframe icosahedron that leans toward the cursor. */
-function DistortBlob({ pointer }: { pointer: PointerRef }) {
+/** Glowing, distorting wireframe icosahedron that leans toward the pointer. */
+function DistortBlob({ pointer, radius = 1.8 }: { pointer: PointerRef; radius?: number }) {
   const mesh = useRef<Mesh>(null);
   useFrame((state) => {
     const m = mesh.current;
@@ -34,7 +34,7 @@ function DistortBlob({ pointer }: { pointer: PointerRef }) {
     m.rotation.x = Math.sin(t * 0.3) * 0.15 + p.y * 0.3;
   });
   return (
-    <Icosahedron ref={mesh} args={[1.8, 5]} position={[0, 0.25, 0]}>
+    <Icosahedron ref={mesh} args={[radius, 5]} position={[0, 0.25, 0]}>
       <MeshDistortMaterial
         color="#7c3aed"
         emissive="#5b21b6"
@@ -49,7 +49,7 @@ function DistortBlob({ pointer }: { pointer: PointerRef }) {
   );
 }
 
-/** Slowly drifting particle shell that parallaxes with the cursor. */
+/** Slowly drifting particle shell that parallaxes with the pointer. */
 function Particles({ pointer, count = 700 }: { pointer: PointerRef; count?: number }) {
   const ref = useRef<ThreePoints>(null);
   const positions = useMemo(() => {
@@ -86,11 +86,31 @@ function Particles({ pointer, count = 700 }: { pointer: PointerRef; count?: numb
   );
 }
 
-export default function HeroScene() {
+export default function HeroScene({ lowPower = false }: { lowPower?: boolean }) {
   const pointer = useGlobalPointer();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(true);
+
+  // Pause the render loop (and all GPU work) whenever the hero is off-screen.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Lighter footprint on phones / coarse-pointer devices.
+  const particleCount = lowPower ? 280 : 700;
+  const blobRadius = lowPower ? 1.45 : 1.8;
+  const dpr: [number, number] = lowPower ? [1, 1.3] : [1, 1.5];
 
   return (
     <motion.div
+      ref={containerRef}
       aria-hidden
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -98,17 +118,22 @@ export default function HeroScene() {
       className="absolute inset-0 pointer-events-none"
     >
       <Canvas
+        frameloop={active ? "always" : "never"}
         camera={{ position: [0, 0, 6], fov: 45 }}
-        dpr={[1, 1.5]}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+        dpr={dpr}
+        gl={{
+          alpha: true,
+          antialias: !lowPower,
+          powerPreference: lowPower ? "low-power" : "high-performance",
+        }}
         style={{ pointerEvents: "none" }}
       >
         <ambientLight intensity={0.6} />
         <pointLight position={[6, 6, 6]} intensity={45} color="#a78bfa" />
         <pointLight position={[-6, -4, 2]} intensity={28} color="#7c3aed" />
         <Suspense fallback={null}>
-          <DistortBlob pointer={pointer} />
-          <Particles pointer={pointer} />
+          <DistortBlob pointer={pointer} radius={blobRadius} />
+          <Particles pointer={pointer} count={particleCount} />
         </Suspense>
       </Canvas>
     </motion.div>
