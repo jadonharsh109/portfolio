@@ -14,7 +14,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/jadonharsh/",
     upwork: "https://www.upwork.com/freelancers/jadonharsh",
     discord: "https://discord.com/users/719570015099289701",
-    instagram: "https://www.instagram.com/jadonharsh_/",
+    instagram: "https://www.instagram.com/jadonharsh109/",
   },
 };
 
