@@ -101,7 +101,7 @@ export default function RootLayout({
               jobTitle: "DevOps & Platform Engineer",
               worksFor: {
                 "@type": "Organization",
-                name: "howie.systems",
+                name: "iHeal Information Technology LLC",
               },
               sameAs: [
                 "https://github.com/jadonharsh109",

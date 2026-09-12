@@ -158,6 +158,14 @@ export default function Experience() {
                       <div className="text-muted text-sm mt-1">
                         {cert.issuer}
                       </div>
+                      {cert.inProgress && (
+                        <span className="inline-flex items-center gap-1.5 mt-2 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                          <span className="text-xs font-mono text-amber-400">
+                            In Progress
+                          </span>
+                        </span>
+                      )}
                     </div>
                   </div>
                   </div>

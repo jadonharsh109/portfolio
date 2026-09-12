@@ -11,7 +11,7 @@ import { siteConfig, stats } from "@/lib/data";
 import MagneticButton from "./MagneticButton";
 import CountUp from "./CountUp";
 import ScrambleText from "./ScrambleText";
-import Hero3D from "./hero/Hero3D";
+import HeroTerminal from "./hero/HeroTerminal";
 import { FiGithub, FiLinkedin, FiArrowDown } from "react-icons/fi";
 import { SiUpwork } from "react-icons/si";
 
@@ -72,8 +72,8 @@ export default function Hero() {
         }}
       />
 
-      {/* WebGL centerpiece (desktop, motion-friendly devices only) */}
-      <Hero3D />
+      {/* Floating terminal centerpiece (desktop only) */}
+      <HeroTerminal />
 
       <motion.div
         style={{ y, opacity }}

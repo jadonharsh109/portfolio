@@ -73,12 +73,14 @@ export default function About() {
                   </span>
                 </div>
                 <p className="text-white font-medium text-lg">
-                  Generative AI & MLOps
+                  Generative AI & On-Device ML
                 </p>
                 <p className="text-muted text-sm mt-2">
-                  Building intelligent AI/ML pipelines integrated with modern
-                  cloud infrastructure — LangChain, Vector Databases, LLM
-                  Fine-Tuning, and AI Agents.
+                  Building local-first AI/ML tooling — on-device face
+                  recognition and offline search in{" "}
+                  <span className="text-accent-light">Smriti</span>, and a
+                  local-model diagramming tool called{" "}
+                  <span className="text-accent-light">Advect</span>.
                 </p>
               </div>
             </RevealOnScroll>

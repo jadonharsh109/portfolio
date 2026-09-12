@@ -4,72 +4,85 @@ import { siteConfig } from "@/lib/data";
 import { RevealOnScroll } from "./AnimatedText";
 import CountUp from "./CountUp";
 import ScrambleText from "./ScrambleText";
-import TiltCard from "./TiltCard";
-import { FiGithub, FiExternalLink, FiStar, FiGitBranch } from "react-icons/fi";
-
-const pinnedRepos = [
-  {
-    name: "IaC-Master-Actions",
-    description:
-      "End-to-end CI/CD with GitHub Actions, Docker, Terraform & SonarQube across multiple environments.",
-    language: "HCL",
-    stars: 11,
-  },
-  {
-    name: "aws-zero-trust",
-    description:
-      "Zero-Trust Kubernetes environment on AWS EKS with Kyverno, Calico & strict RBAC policies.",
-    language: "HCL",
-    stars: 7,
-  },
-  {
-    name: "Terraform-EKS",
-    description:
-      "Streamlined EKS cluster deployment with Terraform for EC2 & Fargate workloads with Helm charts.",
-    language: "HCL",
-    stars: 7,
-  },
-  {
-    name: "Terraform-AWS-AppRunner",
-    description:
-      "Terraform scripts for AWS infrastructure, IAM roles & Docker deployment to AWS AppRunner.",
-    language: "HCL",
-    stars: 8,
-  },
-  {
-    name: "DevSecOps-Complete-Project",
-    description:
-      "End-to-end DevSecOps automation with SonarQube, OWASP & Trivy for multi-phase security checks.",
-    language: "Shell",
-    stars: 5,
-  },
-  {
-    name: "AuthFlow-JenkinsK8s",
-    description:
-      "Kubernetes infrastructure automation with Jenkins CI/CD, centralized logging & monitoring.",
-    language: "HCL",
-    stars: 4,
-  },
-];
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
 const githubStats = [
-  { value: "1,688+", label: "Contributions" },
-  { value: "32+", label: "Repositories" },
-  { value: "42+", label: "Stars Earned" },
-  { value: "3+", label: "Years Active" },
+  { value: "2,580+", label: "Contributions" },
+  { value: "37+", label: "Repositories" },
+  { value: "143+", label: "Stars Earned" },
+  { value: "4+", label: "Years Active" },
 ];
 
-const langColors: Record<string, string> = {
-  HCL: "#844FBA",
-  Shell: "#89e051",
-  TypeScript: "#3178c6",
-  Python: "#3572A5",
-  JavaScript: "#f1e05a",
-};
+// Real contribution calendar (last 12 months, snapshot) — 53 weeks x 7 days
+// (Sun-Sat), each cell a GitHub-style intensity level from 0 (none) to 4
+// (most active). Pulled from github.com/users/jadonharsh109/contributions.
+const CONTRIBUTION_LEVELS: number[][] = [
+  [0,1,0,0,0,1,0],
+  [0,1,0,1,1,0,0],
+  [0,1,3,1,1,1,0],
+  [0,1,1,1,1,1,1],
+  [1,1,1,1,1,1,0],
+  [0,1,0,0,0,1,1],
+  [1,1,2,1,2,1,1],
+  [0,1,1,1,1,1,1],
+  [1,1,1,1,1,1,0],
+  [0,1,1,0,0,0,0],
+  [0,0,1,1,1,1,0],
+  [0,1,1,2,4,0,0],
+  [0,1,3,2,2,2,1],
+  [1,0,1,1,2,1,0],
+  [0,0,4,4,4,2,2],
+  [4,3,4,3,1,1,1],
+  [0,0,0,0,0,0,0],
+  [0,1,1,0,0,1,0],
+  [0,1,1,2,1,1,0],
+  [1,2,2,0,0,0,0],
+  [0,3,3,1,2,1,0],
+  [0,1,1,0,1,1,0],
+  [0,1,2,1,1,1,0],
+  [0,2,1,2,2,1,0],
+  [0,1,0,1,1,1,0],
+  [0,0,1,1,2,1,1],
+  [0,1,1,1,2,1,1],
+  [0,0,1,1,1,1,0],
+  [0,1,1,1,0,1,0],
+  [0,1,2,0,3,2,0],
+  [0,0,0,0,2,1,0],
+  [0,2,0,1,2,3,0],
+  [0,1,1,1,1,1,0],
+  [0,1,1,2,1,2,1],
+  [0,1,1,2,1,2,3],
+  [0,1,1,4,1,1,1],
+  [0,1,0,0,2,1,0],
+  [0,1,0,0,0,0,0],
+  [0,3,1,1,2,1,0],
+  [0,2,1,2,1,1,0],
+  [0,1,1,4,2,0,0],
+  [0,0,1,0,0,0,0],
+  [1,1,2,1,1,1,0],
+  [0,0,1,1,1,1,0],
+  [0,0,1,2,2,2,1],
+  [0,1,1,1,1,3,2],
+  [0,2,3,3,1,1,1],
+  [0,1,2,1,1,1,0],
+  [0,1,2,1,4,4,3],
+  [0,3,2,2,2,3,2],
+  [3,1,1,0,2,0,0],
+  [0,1,1,1,1,0,0],
+  [0,1,3,2,0,1,0],
+];
+
+const LEVEL_COLORS = [
+  "rgba(124,58,237,0.06)",
+  "rgba(124,58,237,0.25)",
+  "rgba(124,58,237,0.45)",
+  "rgba(124,58,237,0.7)",
+  "#7c3aed",
+];
 
 export default function GitHub() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
+    <section className="relative pt-10 md:pt-14 pb-16 md:pb-24 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll>
@@ -121,84 +134,27 @@ export default function GitHub() {
 
         {/* Contribution Graph */}
         <RevealOnScroll delay={0.15}>
-          <div className="p-4 sm:p-6 rounded-2xl border border-border bg-card mb-12">
+          <div className="p-4 sm:p-6 rounded-2xl border border-border bg-card">
             <div className="text-xs text-muted uppercase tracking-wider font-mono mb-4">
               Contribution Graph
             </div>
             <div className="overflow-x-auto -mx-2 px-2 pb-2">
               <div className="flex gap-[3px] w-max sm:w-auto sm:flex-wrap sm:justify-center">
-                {Array.from({ length: 52 }).map((_, weekIdx) => (
+                {CONTRIBUTION_LEVELS.map((week, weekIdx) => (
                   <div key={weekIdx} className="flex flex-col gap-[3px]">
-                    {Array.from({ length: 7 }).map((_, dayIdx) => {
-                      // Deterministic pseudo-random based on position
-                      const seed = (weekIdx * 7 + dayIdx + 42) * 2654435761;
-                      const intensity = ((seed >>> 0) % 100) / 100;
-                      return (
-                        <div
-                          key={dayIdx}
-                          className="w-[9px] h-[9px] sm:w-[11px] sm:h-[11px] rounded-[2px]"
-                          style={{
-                            backgroundColor:
-                              intensity > 0.75
-                                ? "#7c3aed"
-                                : intensity > 0.5
-                                  ? "rgba(124,58,237,0.55)"
-                                  : intensity > 0.3
-                                    ? "rgba(124,58,237,0.25)"
-                                    : "rgba(124,58,237,0.06)",
-                          }}
-                        />
-                      );
-                    })}
+                    {week.map((level, dayIdx) => (
+                      <div
+                        key={dayIdx}
+                        className="w-[9px] h-[9px] sm:w-[11px] sm:h-[11px] rounded-[2px]"
+                        style={{ backgroundColor: LEVEL_COLORS[level] }}
+                      />
+                    ))}
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </RevealOnScroll>
-
-        {/* Pinned Repos */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {pinnedRepos.map((repo, index) => (
-            <RevealOnScroll key={repo.name} delay={index * 0.08} className="h-full">
-              <TiltCard className="h-full" radiusClass="rounded-xl" intensity={6}>
-              <a
-                href={`${siteConfig.social.github}/${repo.name}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-label="Open repo"
-                className="group flex flex-col p-5 rounded-xl border border-border bg-card hover:border-accent/25 transition-all duration-300 card-shine hover-target h-full"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <FiGitBranch className="text-accent" size={16} />
-                  <span className="text-white font-semibold text-sm group-hover:text-accent transition-colors truncate">
-                    {repo.name}
-                  </span>
-                </div>
-                <p className="text-muted text-xs leading-relaxed mb-4 line-clamp-2">
-                  {repo.description}
-                </p>
-                <div className="flex items-center gap-4 mt-auto pt-2">
-                  <div className="flex items-center gap-1.5">
-                    <div
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{
-                        backgroundColor:
-                          langColors[repo.language] || "#8b8b8b",
-                      }}
-                    />
-                    <span className="text-muted text-xs">{repo.language}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-muted">
-                    <FiStar size={12} />
-                    <span className="text-xs">{repo.stars}</span>
-                  </div>
-                </div>
-              </a>
-              </TiltCard>
-            </RevealOnScroll>
-          ))}
-        </div>
       </div>
     </section>
   );

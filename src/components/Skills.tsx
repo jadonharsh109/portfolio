@@ -44,6 +44,10 @@ const iconMap: Record<string, string> = {
   "Vector Databases": "📊",
   "LLM Fine-Tuning": "🎛️",
   "AI Agents": "🕵️",
+  "ONNX Runtime": "🧩",
+  Tauri: "🖥️",
+  "Face Recognition": "🧿",
+  SQLite: "🗄️",
 };
 
 export default function Skills() {

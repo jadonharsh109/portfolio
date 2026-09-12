@@ -3,11 +3,11 @@ export const siteConfig = {
   shortName: "Harsh",
   title: "DevOps & Platform Engineer",
   description:
-    "DevOps & Platform Engineer with 4+ years of experience building and operating cloud-native platforms across AWS and Azure. Currently expanding into Generative AI, LLM infrastructure, and MLOps.",
+    "DevOps & Platform Engineer with 4+ years across healthcare, fintech, and GenAI infrastructure — AWS, Azure, Kubernetes, Terraform, GitOps, and SRE. Building Smriti, an offline-first photo library, on the side.",
   domain: "jadonharsh.in",
   email: "jadonharsh109@gmail.com",
   location: "Indore, Madhya Pradesh, India",
-  company: "howie.systems",
+  company: "iHeal Information Technology LLC",
   resumeUrl: "#",
   social: {
     github: "https://github.com/jadonharsh109",
@@ -31,14 +31,13 @@ export const navLinks = [
 export const stats = [
   { value: "4+", label: "Years Experience" },
   { value: "30+", label: "Upwork Projects" },
-  { value: "1688+", label: "GitHub Contributions" },
+  { value: "2,580+", label: "GitHub Contributions" },
   { value: "3", label: "Certifications" },
 ];
 
 export const aboutParagraphs = [
-  "I'm Harshvardhan Singh Jadon — a DevOps & Platform Engineer with 4+ years of experience building and operating cloud-native platforms across AWS and Microsoft Azure. Currently at howie.systems, I architect multi-tenant SaaS platforms with FastAPI, Keycloak, and Kubernetes. I also freelance for multiple clients including Eigenkor (Houston) and Seentech (Jeddah).",
-  "Skilled in Kubernetes, Terraform (IaC), CI/CD, GitOps, and cloud security, I support scalable microservices and distributed systems. Experienced in Python-based backend development, automation, and observability-driven operations to improve deployment speed and platform reliability.",
-  "Currently expanding into Generative AI, LLM infrastructure, and MLOps with a focus on production-ready AI systems — integrating vector databases, embedding pipelines, and workflow orchestration into modern cloud platforms.",
+  "I'm Harshvardhan Singh Jadon — a DevOps & Platform Engineer with 4+ years in infrastructure, three of them running Kubernetes, Terraform, and GitOps across Azure and AWS. Currently the sole platform owner for iHeal, a regulated UAE healthcare product, leading its AWS-to-Azure migration — before that, four years at HCLTech, plus contract stints as the sole DevOps engineer for startups in fintech and GenAI.",
+  "In my own time I build things I actually use. Smriti is an offline photo library — face recognition, geocoding, and search, entirely on-device. Part of a broader move into Generative AI and on-device ML, alongside smaller experiments like Advect.",
 ];
 
 export interface Skill {
@@ -114,6 +113,17 @@ export const skillCategories = [
       "Redis",
     ],
   },
+  {
+    title: "AI/ML & On-Device",
+    skills: [
+      "ONNX Runtime",
+      "Tauri",
+      "Face Recognition",
+      "SQLite",
+      "Generative AI",
+      "MLOps",
+    ],
+  },
 ];
 
 export interface Experience {
@@ -128,114 +138,136 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    role: "Engineering (Freelancing)",
-    company: "howie.systems",
-    location: "Vienna (Remote)",
-    period: "Sep 2025 – Present",
+    role: "DevOps & Platform Engineer",
+    company: "iHeal Information Technology LLC",
+    location: "Dubai, UAE (Remote)",
+    period: "Apr 2026 – Present",
     description:
-      "Architecting a multi-tenant SaaS platform with FastAPI, Keycloak SSO, and Kubernetes on Azure.",
+      "Sole platform owner for a regulated UAE healthcare product, leading its AWS-to-Azure migration.",
     highlights: [
-      "Built multi-tenant auth platform with schema-per-tenant PostgreSQL isolation, MinIO, Qdrant, and Redis",
-      "Developed API Gateway with JWT auth, RBAC, circuit breakers, distributed tracing, and Prometheus monitoring",
-      "Delivered scalable document ingestion platform with SharePoint OAuth, VPN proxy, and Temporal workflows",
-      "Provisioned Azure infra (AKS, ACR, Key Vault, PostgreSQL) with Terraform and GitHub Actions CI/CD",
+      "Led an AWS-to-Azure migration for UAE health-data residency in a single planned cutover",
+      "Architected the Azure landing zone as IaC — Terraform, 8 isolated stacks, zero static credentials",
     ],
-    technologies: [
-      "FastAPI",
-      "Keycloak",
-      "Terraform",
-      "Azure AKS",
-      "Temporal",
-      "PostgreSQL",
-    ],
+    technologies: ["Azure", "AKS", "Terraform", "Entra ID", "GitHub Actions"],
   },
   {
-    role: "DevOps Manager (Freelancing)",
-    company: "Eigenkor",
-    location: "Houston (Remote)",
-    period: "Mar 2025 – Present",
-    description:
-      "Leading DevOps and cloud operations for a multi-product fintech ecosystem.",
-    highlights: [
-      "Architected serverless EC2 scheduling with Lambda, API Gateway & EventBridge, reducing manual ops by ~95%",
-      "Lowered trading order execution latency by ~73% through Redis caching and async queue processing",
-      "Containerized and coordinated 15+ microservices using Docker, Compose, and GitHub Actions CI/CD",
-      "Directed end-to-end AWS infrastructure with Terraform and optimized multi-stage Docker builds",
-    ],
-    technologies: [
-      "AWS",
-      "Terraform",
-      "Docker",
-      "GitHub Actions",
-      "Redis",
-      "Lambda",
-    ],
-  },
-  {
-    role: "DevOps Engineer (Freelancing)",
-    company: "Seentech.sa",
-    location: "Jeddah (Remote)",
-    period: "Mar 2026 – May 2026",
-    description:
-      "Engineered reusable Terraform IaC modules and GitOps-driven CI/CD for a multi-environment platform.",
-    highlights: [
-      "Built reusable Terraform modules for VPC, compute, databases, LB, DNS with AWS WAF & CloudTrail",
-      "Established GitOps CI/CD with GitHub Actions, Helm, multi-arch Docker builds, and App-of-Apps model",
-      "Maintained custom Helm charts for 6+ microservices with HPA, Ingress, and ServiceAccounts",
-      "Deployed centralized observability stack with distributed tracing, metrics, and CloudWatch alarms",
-    ],
-    technologies: [
-      "Terraform",
-      "AWS",
-      "Helm",
-      "GitHub Actions",
-      "Kubernetes",
-      "OpenVPN",
-    ],
-  },
-  {
-    role: "Analyst (Full Time)",
+    role: "Analyst, Infrastructure, Identity & Automation",
     company: "HCLTech",
-    location: "Lucknow (Onsite)",
+    location: "Lucknow, India (Onsite)",
     period: "Dec 2022 – Mar 2026",
     description:
-      "Administered enterprise Active Directory infrastructure supporting 1M+ users in healthcare.",
+      "HIPAA-regulated Windows and Linux estate on AWS and on-premises for Tenet Healthcare, Dallas.",
     highlights: [
-      "Maintained HIPAA compliance while achieving 95% SLA-based request resolution",
-      "Managed AD operations including users, security groups, DNS, Group Policy, and patch management",
-      "Improved compliance visibility using Active Directory, Splunk, and ServiceNow",
+      "Automated operations across 300+ servers, cutting manual effort 40%",
+      "Managed identity for 1M+ users — Active Directory, Entra ID, RBAC",
     ],
-    technologies: [
-      "Active Directory",
-      "Splunk",
-      "ServiceNow",
-      "Group Policy",
-      "DNS",
-      "ITIL",
-    ],
+    technologies: ["AWS", "Active Directory", "Entra ID", "Splunk", "ServiceNow"],
   },
   {
-    role: "Freelance DevOps Engineer",
-    company: "Upwork",
-    location: "Remote",
-    period: "Sep 2023 – Present",
+    role: "Platform Engineer (Contract)",
+    company: "Howie FlexCo",
+    location: "Vienna, Austria (Remote)",
+    period: "2025 · alongside HCLTech",
     description:
-      "Delivering infrastructure automation and cloud solutions to global clients. Top Rated freelancer (Top 10%).",
+      "Built observability and release discipline for a GenAI startup's multi-tenant SaaS platform.",
     highlights: [
-      "Streamlined infra provisioning with Terraform across AWS Organizations, eliminating ~90% manual setup",
-      "Delivered scalable AWS architectures reducing deployment time by ~50%",
-      "Implemented SOC 2 controls with Vanta, achieving full audit readiness",
+      "Built the observability stack from scratch — Prometheus, Grafana, Loki, Jaeger, 80 alert rules",
+      "Owned release management across 20 pipelines — 49 releases in 90 days",
     ],
-    technologies: [
-      "AWS",
-      "Terraform",
-      "EKS",
-      "Docker",
-      "Helm",
-      "Ansible",
+    technologies: ["Azure", "AKS", "Terraform", "Prometheus", "Grafana"],
+  },
+  {
+    role: "DevOps Engineer (Contract) — Sole Owner",
+    company: "eigenKOR",
+    location: "Houston, USA (Remote)",
+    period: "2025 · alongside HCLTech",
+    description: "Sole DevOps owner for a fintech startup running two trading products.",
+    highlights: [
+      "Built the AWS estate from scratch in Terraform for 15+ microservices",
+      "Cut order execution latency 73% and monthly AWS cost 40%",
     ],
+    technologies: ["AWS", "Terraform", "Redis", "Docker"],
+  },
+  {
+    role: "DevOps Engineer (Contract)",
+    company: "Seentech.sa",
+    location: "Jeddah, Saudi Arabia (Remote)",
+    period: "Mar 2025 – Present",
+    description:
+      "Ongoing GitOps-driven infrastructure work for a SaaS platform, alongside HCLTech.",
+    highlights: [
+      "Built reusable Terraform modules for VPC, compute, databases, and DNS",
+      "Established GitOps CI/CD with GitHub Actions, Helm, and an App-of-Apps model",
+    ],
+    technologies: ["Terraform", "AWS", "Helm", "GitHub Actions", "Kubernetes"],
+  },
+  {
+    role: "TechBee Scholar & Intern",
+    company: "HCLTech",
+    location: "Lucknow, India (Onsite)",
+    period: "Dec 2021 – Dec 2022",
+    description:
+      "Foundational infrastructure program — systems administration and networking.",
+    highlights: [
+      "Linux/Windows administration, shell scripting, and virtualization",
+      "LAN/WAN/VPN routing (OSPF, BGP)",
+    ],
+    technologies: ["Linux", "Windows Server", "Bash", "Networking"],
   },
 ];
+
+export interface FlagshipProject {
+  name: string;
+  sanskrit: string;
+  meaning: string;
+  tagline: string;
+  description: string;
+  highlight: string;
+  features: string[];
+  version: string;
+  license: string;
+  platforms: string[];
+  technologies: string[];
+  github: string;
+  homepage?: string;
+  year: string;
+}
+
+export const flagshipProject: FlagshipProject = {
+  name: "Smriti",
+  sanskrit: "स्मृति",
+  meaning: "that which is remembered",
+  tagline: "An offline photo library that actually remembers",
+  description:
+    "A 2TB drive with 12,000 photos I hadn't opened in two years pushed me to build Smriti — it turns the folders already on your drives into a real library: a timeline, natural-language search, faces grouped into people, places from GPS, and auto-generated trip recaps.",
+  highlight:
+    "Everything computed on your own machine. No cloud, no account, nothing uploaded — ever.",
+  features: [
+    "Natural-language search — \"sunset over the sea\" — answered by an on-device vision model",
+    "Moments: auto-generated trip recap videos with generated music, entirely offline",
+    "On-device face recognition (SCRFD + ArcFace), clustered into people you can name",
+    "Offline reverse geocoding on a tile-server-free interactive globe",
+    "Duplicate detection (exact + perceptual hash) with safe cleanup to Trash",
+    "Google Takeout repair — restores the dates & GPS Google strips out, nothing re-encoded",
+    "Headless/CLI server mode — reach your library from any device on your LAN",
+    "14 themes, a wandering desktop companion, and a passcode-locked section",
+  ],
+  version: "v2.6.0",
+  license: "AGPL-3.0",
+  platforms: ["macOS", "Windows"],
+  technologies: [
+    "FastAPI",
+    "React",
+    "Tauri",
+    "SQLite (WAL)",
+    "ONNX Runtime",
+    "MobileCLIP",
+    "SCRFD + ArcFace",
+  ],
+  github: "https://github.com/jadonharsh109/smriti.photos",
+  homepage: "https://smriti.jadonharsh.in",
+  year: "2026",
+};
 
 export interface Project {
   title: string;
@@ -247,6 +279,19 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: "Advect",
+    description:
+      "Describe an IT or system flow in plain English and get back an animated diagram of the traffic moving through it — powered by a local model, no cloud, no API key.",
+    technologies: ["Python", "Local LLM", "Diagramming", "CLI"],
+    github: "https://github.com/jadonharsh109/Advect",
+    highlights: [
+      "Plain-English flow → animated GIF in ~1 minute",
+      "Runs entirely on-device, no API key required",
+      "Open source",
+    ],
+    featured: true,
+  },
   {
     title: "Multi-Tenant SaaS Platform",
     description:
@@ -392,6 +437,7 @@ export interface Certification {
   title: string;
   issuer: string;
   icon: string;
+  inProgress?: boolean;
 }
 
 export const certifications: Certification[] = [
@@ -409,6 +455,18 @@ export const certifications: Certification[] = [
     title: "AZ-900: Azure Fundamentals",
     issuer: "Microsoft",
     icon: "microsoft",
+  },
+  {
+    title: "Terraform Associate",
+    issuer: "HashiCorp",
+    icon: "terraform",
+    inProgress: true,
+  },
+  {
+    title: "Certified Kubernetes Administrator (CKA)",
+    issuer: "Linux Foundation / CNCF",
+    icon: "kubernetes",
+    inProgress: true,
   },
 ];
 
