@@ -105,7 +105,15 @@ export default function Navbar() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-2">
+              <MagneticButton strength={0.2}>
+                <a
+                  href={siteConfig.resumeUrl}
+                  className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-muted hover:text-white transition-colors duration-300 hover-target"
+                >
+                  Resume
+                </a>
+              </MagneticButton>
               <MagneticButton strength={0.2}>
                 <a
                   href="#contact"
@@ -190,6 +198,15 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
+              <motion.a
+                href={siteConfig.resumeUrl}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="text-2xl font-light text-muted hover:text-white transition-colors"
+              >
+                Resume
+              </motion.a>
               <motion.a
                 href="#contact"
                 onClick={(e) => {

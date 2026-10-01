@@ -8,7 +8,7 @@ export const siteConfig = {
   email: "jadonharsh109@gmail.com",
   location: "Indore, Madhya Pradesh, India",
   company: "iHeal Information Technology LLC",
-  resumeUrl: "#",
+  resumeUrl: "/resume",
   social: {
     github: "https://github.com/jadonharsh109",
     linkedin: "https://www.linkedin.com/in/jadonharsh/",
@@ -17,6 +17,20 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/jadonharsh109/",
   },
 };
+
+export const resumes = [
+  { id: "master", label: "DevOps & Platform", title: "DevOps & Platform Engineer", file: "Master" },
+  { id: "aws", label: "AWS", title: "AWS DevOps / Platform Engineer", file: "AWS" },
+  { id: "azure", label: "Azure", title: "Azure DevOps / Platform Engineer", file: "Azure" },
+  { id: "platform", label: "Platform", title: "Platform Engineer", file: "Platform" },
+  { id: "cloud", label: "Cloud", title: "Cloud DevOps Engineer", file: "Cloud" },
+  { id: "sre", label: "SRE", title: "Site Reliability Engineer / Platform Engineer", file: "SRE" },
+] as const;
+
+export type ResumeId = (typeof resumes)[number]["id"];
+
+export const resumeFileUrl = (file: string, onePage: boolean) =>
+  `/resume/Harshvardhan_Jadon_${file}_Resume${onePage ? "_1page" : ""}.pdf`;
 
 export const navLinks = [
   { label: "Home", href: "#home" },
